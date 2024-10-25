@@ -181,15 +181,18 @@ function formatGainedValue(value) {
 // Button click handler to toggle between loading and stopping
 function handleButtonClick() {
   if (loading) {
-    // If loading is in progress, stop loading and update button text
+    // Stop loading if it's in progress
     cancelLoading = true;
     updateButtonText("Re-Load Highscores");
   } else {
-    // If loading is not in progress, open the date modal to select new dates
-    dateModal.style.display = 'block';
+    // If not loading, open the date modal to start a new process
+    if (!cancelLoading) {
+      dateModal.style.display = 'block'; // Only open if it's not in the process of cancelling
+    }
   }
 }
 
 // Add event listener to the button
 document.getElementById('loadHighscoresBtn').addEventListener('click', handleButtonClick);
+
 
