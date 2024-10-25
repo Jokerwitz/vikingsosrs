@@ -119,7 +119,17 @@ async function fetchWiseOldManData(type, name, tableId, startDate, endDate) {
         const table = document.getElementById(tableId);
         const row = document.createElement('tr');
         const header = document.createElement('th');
-        header.textContent = name.charAt(0).toUpperCase() + name.slice(1).replace(/_/g, ' ');
+        // Create the image element
+        const img = document.createElement('img');
+        img.src = `https://wiseoldman.net/_next/image?url=%2Fimg%2Fmetrics_small%2F${name}.png&w=16&q=16`;  // Assuming your images are stored in 'images/' directory
+        //img.src = `images/${name}.png`;  // Assuming your images are stored in 'images/' directory
+        img.alt = name;  // Accessibility: alt text set to the name of the metric
+        img.classList.add('icon');  // Add a class for styling
+
+        // Append the image and the text to the header
+        header.appendChild(img);
+        header.append(name.charAt(0).toUpperCase() + name.slice(1).replace(/_/g, ' '));
+
         row.appendChild(header);
 
         data.forEach((player, index) => {
