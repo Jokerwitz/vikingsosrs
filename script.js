@@ -166,14 +166,14 @@ async function loadActivities(startDate, endDate) {
   }
 }
 
-// Helper function to format large XP values (e.g., 21576080 => 21576K, 11111 => 11.1K)
+// Helper function to format large XP values (e.g., 21576080 => 21.57M, 11111 => 11.1K)
 function formatGainedValue(value) {
   if (value >= 10000000) {
-    return Math.floor value /10000) + 'M';
+    return (value / 1000000).toFixed(2) + 'M'; // For values ≥ 10,000,000, use 'M' notation
   } else if (value >= 100000) {
-    return Math.floor(value / 1000) + 'K'; // No decimal for large values
+    return Math.floor(value / 1000) + 'K'; // For values between 100,000 and 10,000,000, use whole 'K'
   } else if (value >= 10000) {
-    return (value / 1000).toFixed(1) + 'K'; // One decimal place for smaller values
+    return (value / 1000).toFixed(1) + 'K'; // For values between 10,000 and 100,000, use 1 decimal 'K'
   }
   return value; // Return the value as is if it's below 10,000
 }
