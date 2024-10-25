@@ -1,16 +1,35 @@
 // Skills metrics list
 const skills = [
-    'overall', 'attack', 'defence', 'strength', 'hitpoints', 'ranged', 'prayer', 'magic', 'cooking', 'woodcutting', 'fletching', 'fishing', 'firemaking', 'crafting', 'smithing', 'mining', 'herblore', 'agility', 'thieving', 'slayer', 'farming', 'runecrafting', 'hunter', 'construction'
+    "overall", "attack", "defence", "strength", "hitpoints", "ranged", "prayer",
+    "magic", "cooking", "woodcutting", "fletching", "fishing", "firemaking",
+    "crafting", "smithing", "mining", "herblore", "agility", "thieving",
+    "slayer", "farming", "runecrafting", "hunter", "construction"
 ];
 
 // Bosses metrics list
 const bosses = [
-    'abyssal_sire', 'alchemical_hydra', 'amoxliatl', 'araxxor', 'artio', 'barrows_chests', 'bryophyta', 'callisto', 'calvarion', 'cerberus', 'chambers_of_xeric', 'chambers_of_xeric_challenge_mode', 'chaos_elemental', 'chaos_fanatic', 'commander_zilyana', 'corporeal_beast', 'crazy_archaeologist', 'dagannoth_prime', 'dagannoth_rex', 'dagannoth_supreme', 'deranged_archaeologist', 'duke_sucellus', 'general_graardor', 'giant_mole', 'grotesque_guardians', 'hespori', 'kalphite_queen', 'king_black_dragon', 'kraken', 'kreearra', 'kril_tsutsaroth', 'lunar_chests', 'mimic', 'nex', 'nightmare', 'phosanis_nightmare', 'obor', 'phantom_muspah', 'sarachnis', 'scorpia', 'scurrius', 'skotizo', 'sol_heredit', 'spindel', 'tempoross', 'the_gauntlet', 'the_corrupted_gauntlet', 'the_hueycoatl', 'the_leviathan', 'the_whisperer', 'theatre_of_blood', 'theatre_of_blood_hard_mode', 'thermonuclear_smoke_devil', 'tombs_of_amascut', 'tombs_of_amascut_expert', 'tzkal_zuk', 'tztok_jad', 'vardorvis', 'venenatis', 'vetion', 'vorkath', 'wintertodt', 'zalcano', 'zulrah'
+    'abyssal_sire', 'alchemical_hydra', 'amoxliatl', 'araxxor', 'artio', 'barrows_chests',
+    'bryophyta', 'callisto', 'calvarion', 'cerberus', 'chambers_of_xeric',
+    'chambers_of_xeric_challenge_mode', 'chaos_elemental', 'chaos_fanatic',
+    'commander_zilyana', 'corporeal_beast', 'crazy_archaeologist', 'dagannoth_prime',
+    'dagannoth_rex', 'dagannoth_supreme', 'deranged_archaeologist', 'duke_sucellus',
+    'general_graardor', 'giant_mole', 'grotesque_guardians', 'hespori', 'kalphite_queen',
+    'king_black_dragon', 'kraken', 'kreearra', 'kril_tsutsaroth', 'lunar_chests',
+    'mimic', 'nex', 'nightmare', 'phosanis_nightmare', 'obor', 'phantom_muspah',
+    'sarachnis', 'scorpia', 'scurrius', 'skotizo', 'sol_heredit', 'spindel',
+    'tempoross', 'the_gauntlet', 'the_corrupted_gauntlet', 'the_hueycoatl',
+    'the_leviathan', 'the_whisperer', 'theatre_of_blood', 'theatre_of_blood_hard_mode',
+    'thermonuclear_smoke_devil', 'tombs_of_amascut', 'tombs_of_amascut_expert',
+    'tzkal_zuk', 'tztok_jad', 'vardorvis', 'venenatis', 'vetion', 'vorkath',
+    'wintertodt', 'zalcano', 'zulrah'
 ];
 
 // Activities metrics list
 const activities = [
-    'league_points', 'bounty_hunter_hunter', 'bounty_hunter_rogue', 'clue_scrolls_all', 'clue_scrolls_beginner', 'clue_scrolls_easy', 'clue_scrolls_medium', 'clue_scrolls_hard', 'clue_scrolls_elite', 'clue_scrolls_master', 'last_man_standing', 'pvp_arena', 'soul_wars_zeal', 'guardians_of_the_rift', 'colosseum_glory'
+    'league_points', 'bounty_hunter_hunter', 'bounty_hunter_rogue', 'clue_scrolls_all',
+    'clue_scrolls_beginner', 'clue_scrolls_easy', 'clue_scrolls_medium', 'clue_scrolls_hard',
+    'clue_scrolls_elite', 'clue_scrolls_master', 'last_man_standing', 'pvp_arena',
+    'soul_wars_zeal', 'guardians_of_the_rift', 'colosseum_glory'
 ];
 
 let loading = false;
@@ -61,7 +80,18 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 // Function to validate start and end dates
 function validateDates(startDate, endDate) {
     if (!startDate || !endDate) return false; // Dates should not be empty
-    return new Date(startDate) <= new Date(endDate); // Start should be before or equal to end
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    // Ensure start date is strictly before end date
+    if (start >= end) {
+        // Option 1: Show error message to user
+        alert('The start date must be before the end date.');
+        return false;
+    }
+
+    return true;
 }
 
 // Function to fetch and load the highscores
@@ -72,16 +102,16 @@ async function loadHighscores(startDate, endDate) {
 
     // Load Skills
     await loadSkills(startDate, endDate);
-    
+
     // Check if cancelLoading is true before continuing
     if (cancelLoading) {
         finishLoading();  // If loading is canceled, finish immediately
         return;
     }
-    
+
     // Add a delay before loading Bosses
-    await delay(100); // 1 second delay
-    
+    await delay(1000); // 1 second delay
+
     // Load Bosses
     await loadBosses(startDate, endDate);
 
@@ -92,7 +122,7 @@ async function loadHighscores(startDate, endDate) {
     }
 
     // Add a delay before loading Activities
-    await delay(100); // 1 second delay
+    await delay(1000); // 1 second delay
 
     // Load Activities
     await loadActivities(startDate, endDate);
@@ -109,23 +139,25 @@ function updateButtonText(text) {
     button.textContent = text;
 }
 
-// Modify the fetchWiseOldManData function to accept date range
+// Modify the fetchWiseOldManData function to use Axios and accept date range
 async function fetchWiseOldManData(type, name, tableId, startDate, endDate) {
     if (cancelLoading) return;
 
     const url = `https://api.wiseoldman.net/v2/groups/4052/gained?metric=${name}&startDate=${startDate}&endDate=${endDate}&limit=3`;
 
     try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await axios.get(url);
+        const data = response.data;
 
         const table = document.getElementById(tableId);
         const row = document.createElement('tr');
+
+        // Create a cell for the image and name
         const header = document.createElement('th');
+
         // Create the image element
         const img = document.createElement('img');
-        img.src = `https://wiseoldman.net/_next/image?url=%2Fimg%2Fmetrics_small%2F${name}.png&w=16&q=16`;  // Assuming your images are stored in 'images/' directory
-        //img.src = `images/${name}.png`;  // Assuming your images are stored in 'images/' directory
+        img.src = `images/${name}.webp`;  // Assuming your images are stored in 'images/' directory
         img.alt = name;  // Accessibility: alt text set to the name of the metric
         img.classList.add('icon');  // Add a class for styling
 
@@ -141,7 +173,7 @@ async function fetchWiseOldManData(type, name, tableId, startDate, endDate) {
 
             const gained = player.data.gained === 0 ? "N/A" :
                 `${rankEmoji} <span class="player-name">${player.player.username}</span> 
-            ( <span class="xp-gained">+${formatGainedValue(player.data.gained)}</span> )`;
+            (<span class="xp-gained">${formatGainedValue(player.data.gained)}</span>)`;
 
             td.innerHTML = gained; // Using innerHTML to apply styles to parts of the text
             row.appendChild(td);
@@ -159,7 +191,7 @@ async function loadSkills(startDate, endDate) {
     table.innerHTML = ''; // Clear table before populating
     for (let i = 0; i < skills.length; i++) {
         await fetchWiseOldManData('skill', skills[i], 'skillsTable', startDate, endDate);
-       // await delay(100); // Respect API rate limits
+        await delay(100); // Respect API rate limits
         if (cancelLoading) break;
     }
 }
@@ -169,7 +201,7 @@ async function loadBosses(startDate, endDate) {
     table.innerHTML = ''; // Clear table before populating
     for (let i = 0; i < bosses.length; i++) {
         await fetchWiseOldManData('boss', bosses[i], 'bossesTable', startDate, endDate);
-        //await delay(100); // Respect API rate limits
+        await delay(100); // Respect API rate limits
         if (cancelLoading) break;
     }
 }
@@ -179,7 +211,7 @@ async function loadActivities(startDate, endDate) {
     table.innerHTML = ''; // Clear table before populating
     for (let i = 0; i < activities.length; i++) {
         await fetchWiseOldManData('activity', activities[i], 'activitiesTable', startDate, endDate);
-        //await delay(100); // Respect API rate limits
+        await delay(100); // Respect API rate limits
         if (cancelLoading) break;
     }
 }
@@ -203,13 +235,13 @@ function handleButtonClick() {
         cancelLoading = true;
         updateButtonText("Re-Load Highscores");
 
-        // Ensure we stop loading and don't reopen the modal
+        // Return early, do not open the date modal
         return;
     }
 
-    // If not loading, reset the flags and open the modal
+    // Only open modal if we are not in the process of stopping
     if (!loading && !cancelLoading) {
-        dateModal.style.display = 'block'; // Open date modal for new date selection
+        dateModal.style.display = 'block'; // Open date modal
     }
 }
 

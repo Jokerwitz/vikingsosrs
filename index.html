@@ -1,59 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viking Clans Highscores</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viking Clans Highscores</title>
+
+    <!-- Include Axios from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Make sure the script is deferred so it loads after the HTML -->
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <img src="vikings.png" alt="Viking Clans Logo" id="logo">
-    <h1>Hall of Fame</h1>
-  </header>
+    <header>
+        <img src="vikings.png" alt="Viking Clans Logo" id="logo">
+        <h1>Hall of Fame</h1>
+    </header>
 
-  <main>
-    <div id="controls">
-      <button id="loadHighscoresBtn">Load Highscores</button>
+    <main>
+        <div id="controls">
+            <button id="loadHighscoresBtn">Load Highscores</button>
+        </div>
+
+        <!-- Skills Section -->
+        <section id="skillsSection">
+            <h2>Skills</h2>
+            <table id="skillsTable">
+                <!-- JavaScript will populate this table -->
+            </table>
+        </section>
+
+        <!-- Bosses Section -->
+        <section id="bossesSection">
+            <h2>Bosses</h2>
+            <table id="bossesTable">
+                <!-- JavaScript will populate this table -->
+            </table>
+        </section>
+
+        <!-- Activities Section -->
+        <section id="activitiesSection">
+            <h2>Activities</h2>
+            <table id="activitiesTable">
+                <!-- JavaScript will populate this table -->
+            </table>
+        </section>
+    </main>
+
+    <!-- Date Modal -->
+    <div id="dateModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Date Range</h2>
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" required>
+            <br><br>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" required>
+            <br><br>
+            <button id="submitDateRange">Submit</button>
+        </div>
     </div>
-
-    <section id="skillsSection">
-      <h2>Skills</h2>
-      <table id="skillsTable">
-        <!-- JavaScript will populate this table -->
-      </table>
-    </section>
-
-    <section id="bossesSection">
-      <h2>Bosses</h2>
-      <table id="bossesTable">
-        <!-- JavaScript will populate this table -->
-      </table>
-    </section>
-
-    <section id="activitiesSection">
-      <h2>Activities</h2>
-      <table id="activitiesTable">
-        <!-- JavaScript will populate this table -->
-      </table>
-    </section>
-  </main>
-
-  <!-- Date Modal -->
-  <div id="dateModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Select Date Range</h2>
-      <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate" required>
-      <br><br>
-      <label for="endDate">End Date:</label>
-      <input type="date" id="endDate" required>
-      <br><br>
-      <button id="submitDateRange">Submit</button>
-    </div>
-  </div>
-
 </body>
 </html>
