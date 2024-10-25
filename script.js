@@ -80,7 +80,7 @@ async function loadHighscores(startDate, endDate) {
     }
     
     // Add a delay before loading Bosses
-    await delay(1000); // 1 second delay
+    await delay(100); // 1 second delay
     
     // Load Bosses
     await loadBosses(startDate, endDate);
@@ -92,7 +92,7 @@ async function loadHighscores(startDate, endDate) {
     }
 
     // Add a delay before loading Activities
-    await delay(1000); // 1 second delay
+    await delay(100); // 1 second delay
 
     // Load Activities
     await loadActivities(startDate, endDate);
@@ -159,7 +159,7 @@ async function loadSkills(startDate, endDate) {
     table.innerHTML = ''; // Clear table before populating
     for (let i = 0; i < skills.length; i++) {
         await fetchWiseOldManData('skill', skills[i], 'skillsTable', startDate, endDate);
-        await delay(100); // Respect API rate limits
+       // await delay(100); // Respect API rate limits
         if (cancelLoading) break;
     }
 }
@@ -169,7 +169,7 @@ async function loadBosses(startDate, endDate) {
     table.innerHTML = ''; // Clear table before populating
     for (let i = 0; i < bosses.length; i++) {
         await fetchWiseOldManData('boss', bosses[i], 'bossesTable', startDate, endDate);
-        await delay(100); // Respect API rate limits
+        //await delay(100); // Respect API rate limits
         if (cancelLoading) break;
     }
 }
@@ -179,7 +179,7 @@ async function loadActivities(startDate, endDate) {
     table.innerHTML = ''; // Clear table before populating
     for (let i = 0; i < activities.length; i++) {
         await fetchWiseOldManData('activity', activities[i], 'activitiesTable', startDate, endDate);
-        await delay(100); // Respect API rate limits
+        //await delay(100); // Respect API rate limits
         if (cancelLoading) break;
     }
 }
