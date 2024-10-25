@@ -168,7 +168,9 @@ async function loadActivities(startDate, endDate) {
 
 // Helper function to format large XP values (e.g., 21576080 => 21576K, 11111 => 11.1K)
 function formatGainedValue(value) {
-  if (value >= 100000) {
+  if (value >= 10000000) {
+    return Math.floor value /10000) + 'M';
+  } else if (value >= 100000) {
     return Math.floor(value / 1000) + 'K'; // No decimal for large values
   } else if (value >= 10000) {
     return (value / 1000).toFixed(1) + 'K'; // One decimal place for smaller values
